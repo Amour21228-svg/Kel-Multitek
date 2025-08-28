@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KelMultitek - Technologie & Industrie</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+        header {
+            background-color: #0d1b2a;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        section {
+            padding: 50px;
+            max-width: 1000px;
+            margin: auto;
+        }
+        h1, h2 {
+            color: #0d1b2a;
+        }
+        .services, .projets {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .card {
+            background: #f4f4f4;
+            padding: 20px;
+            flex: 1 1 calc(33% - 20px);
+            min-width: 250px;
+            border-radius: 10px;
+        }
+        footer {
+            background: #0d1b2a;
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+        @media (max-width: 768px) {
+            .services, .projets {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>KelMultitek</h1>
+    <p>Technologie - Maintenance Industrielle - Développement Web</p>
+    <nav>
+        <a href="#accueil">Accueil</a>
+        <a href="#apropos">À propos</a>
+        <a href="#services">Services</a>
+        <a href="#projets">Projets</a>
+        <a href="#contact">Contact</a>
+    </nav>
+</header>
+
+<section id="accueil">
+    <h2>Bienvenue chez KelMultitek</h2>
+    <p>Nous combinons expertise industrielle et innovation technologique pour offrir des solutions modernes et efficaces.</p>
+</section>
+
+<section id="apropos">
+    <h2>À propos</h2>
+    <p>KelMultitek est une entreprise spécialisée dans la maintenance industrielle, le développement web et mobile, ainsi que la formation technique. Nous croyons en l’évolution constante et en la transmission de savoir-faire.</p>
+</section>
+
+<section id="services">
+    <h2>Nos Services</h2>
+    <div class="services">
+        <div class="card">
+            <h3>Maintenance Industrielle</h3>
+            <p>Préventive, corrective et amélioration continue.</p>
+        </div>
+        <div class="card">
+            <h3>Développement Web</h3>
+            <p>Sites vitrines, e-commerce et applications web sur mesure.</p>
+        </div>
+        <div class="card">
+            <h3>Formations Techniques</h3>
+            <p>Accompagnement des passionnés vers les métiers d’avenir.</p>
+        </div>
+    </div>
+</section>
+
+<section id="projets">
+    <h2>Projets Réalisés</h2>
+    <div class="projets">
+        <div class="card">
+            <h3>Projet 1</h3>
+            <p>Description de ton projet ici.</p>
+        </div>
+        <div class="card">
+            <h3>Projet 2</h3>
+            <p>Description de ton projet ici.</p>
+        </div>
+        <div class="card">
+            <h3>Projet 3</h3>
+            <p>Description de ton projet ici.</p>
+        </div>
+    </div>
+</section>
+
+<section id="contact">
+    <h2>Contact</h2>
+    <p>Email : contact@kelmultitek.com</p>
+    <p>Téléphone : +229 01 23 45 67 89</p>
+</section>
+
+<footer>
+    <p>&copy; 2025 KelMultitek - Tous droits réservés</p>
+</footer>
+
+</body>
+</html>

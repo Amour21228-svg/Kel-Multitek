@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KelMultitek - Technologie & Industrie</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        .animate-fade-in {
+            animation: fadeIn 1s ease-out forwards;
+        }
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+        .delay-500 { animation-delay: 0.5s; }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 100%);
+        }
+        
+        .service-card {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(13, 27, 42, 0.1) 0%, rgba(27, 38, 59, 0.1) 100%);
+            z-index: 1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .service-card:hover::before {
+            opacity: 1;
+        }
+        
+        .project-card {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+        .project-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(13, 27, 42, 0.9);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 2;
+        }
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: #3b82f6;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .contact-input {
+            transition: all 0.3s ease;
+        }
+        .contact-input:focus {
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
+        }
+        
+        .floating-shape {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(59, 130, 246, 0.1);
+            filter: blur(40px);
+            z-index: 0;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased text-gray-800 overflow-x-hidden">
+    <!-- Floating background shapes -->
+    <div class="floating-shape w-64 h-64 -left-32 -top-32 animate-float delay-200 hidden md:block"></div>
+    <div class="floating-shape w-96 h-96 -right-48 bottom-1/3 animate-float delay-300 hidden md:block"></div>
+    
+    <!-- Header/Navigation -->
+    <header class="gradient-bg text-white sticky top-0 z-50 shadow-lg backdrop-blur-sm bg-opacity-90">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center mb-4 md:mb-0">
+                    <i class="fas fa-cogs text-2xl text-blue-300 mr-3"></i>
+                    <h1 class="text-2xl font-bold">KelMultitek</h1>
+                </div>
+                <nav class="flex flex-wrap justify-center gap-4 md:gap-8">
+                    <a href="#accueil" class="nav-link hover:text-blue-300 transition duration-300 font-medium">Accueil</a>
+                    <a href="#apropos" class="nav-link hover:text-blue-300 transition duration-300 font-medium">À propos</a>
+                    <a href="#services" class="nav-link hover:text-blue-300 transition duration-300 font-medium">Services</a>
+                    <a href="#projets" class="nav-link hover:text-blue-300 transition duration-300 font-medium">Projets</a>
+                    <a href="#contact" class="nav-link hover:text-blue-300 transition duration-300 font-medium">Contact</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="accueil" class="gradient-bg text-white py-20 relative overflow-hidden">
+        <div class="container mx-auto px-6 text-center relative z-10">
+            <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 animate-fade-in">Bienvenue chez KelMultitek</h2>
+            <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto animate-fade-in delay-100">
+                Nous combinons expertise industrielle et innovation technologique pour offrir des solutions modernes et efficaces.
+            </p>
+            <div class="animate-fade-in delay-200 flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#contact" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-8 rounded-full transition duration-300 inline-block transform hover:scale-105">
+                    Contactez-nous
+                </a>
+                <a href="#services" class="border-2 border-white hover:bg-white hover:text-gray-900 text-white font-bold py-3 px-8 rounded-full transition duration-300 inline-block transform hover:scale-105">
+                    Nos Services
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="bg-white py-12 shadow-sm">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div class="animate-fade-in">
+                    <div class="text-4xl font-bold text-blue-500 mb-2">50+</div>
+                    <div class="text-gray-600">Clients satisfaits</div>
+                </div>
+                <div class="animate-fade-in delay-100">
+                    <div class="text-4xl font-bold text-blue-500 mb-2">120+</div>
+                    <div class="text-gray-600">Projets réalisés</div>
+                </div>
+                <div class="animate-fade-in delay-200">
+                    <div class="text-4xl font-bold text-blue-500 mb-2">15+</div>
+                    <div class="text-gray-600">Experts techniques</div>
+                </div>
+                <div class="animate-fade-in delay-300">
+                    <div class="text-4xl font-bold text-blue-500 mb-2">5+</div>
+                    <div class="text-gray-600">Années d'expérience</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="apropos" class="py-20 bg-gray-50 relative">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col lg:flex-row items-center">
+                <div class="lg:w-1/2 mb-10 lg:mb-0 animate-fade-in relative">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                             alt="About KelMultitek"
+                             class="rounded-lg shadow-xl w-full h-auto">
+                        <div class="absolute -bottom-6 -right-6 bg-blue-500 text-white p-6 rounded-lg shadow-lg hidden md:block animate-fade-in delay-300">
+                            <div class="text-3xl font-bold">5+</div>
+                            <div class="text-sm">Années d'expérience</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:w-1/2 lg:pl-12 animate-fade-in delay-100">
+                    <span class="inline-block bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-sm font-medium mb-4">À propos de nous</span>
+                    <h2 class="text-3xl font-bold mb-6 text-gray-800">Votre partenaire technologique de confiance</h2>
+                    <p class="text-lg mb-6 text-gray-600">
+                        KelMultitek est une entreprise spécialisée dans la maintenance industrielle, le développement web et mobile, ainsi que la formation technique. Notre équipe d'experts s'engage à fournir des solutions sur mesure pour répondre à vos besoins spécifiques.
+                    </p>
+                    <p class="text-lg mb-6 text-gray-600">
+                        Nous croyons en l'évolution constante et en la transmission de savoir-faire pour construire un avenir technologique meilleur. Notre approche combine innovation et fiabilité pour garantir des résultats durables.
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="flex items-start p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition duration-300">
+                            <i class="fas fa-check-circle text-blue-500 text-xl mt-1 mr-3"></i>
+                            <div>
+                                <h3 class="font-bold text-gray-800">Expertise technique</h3>
+                                <p class="text-gray-600 text-sm">Des professionnels qualifiés pour chaque projet</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition duration-300">
+                            <i class="fas fa-lightbulb text-blue-500 text-xl mt-1 mr-3"></i>
+                            <div>
+                                <h3 class="font-bold text-gray-800">Solutions innovantes</h3>
+                                <p class="text-gray-600 text-sm">Approches créatives pour des défis complexes</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition duration-300">
+                            <i class="fas fa-users text-blue-500 text-xl mt-1 mr-3"></i>
+                            <div>
+                                <h3 class="font-bold text-gray-800">Approche client</h3>
+                                <p class="text-gray-600 text-sm">Écoute active et solutions personnalisées</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition duration-300">
+                            <i class="fas fa-clock text-blue-500 text-xl mt-1 mr-3"></i>
+                            <div>
+                                <h3 class="font-bold text-gray-800">Réactivité</h3>
+                                <p class="text-gray-600 text-sm">Interventions rapides et efficaces</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="inline-block bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-sm font-medium mb-4">Nos Services</span>
+                <h2 class="text-3xl font-bold mb-4 text-gray-800">Solutions complètes pour votre entreprise</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    Des services haut de gamme pour répondre à tous vos besoins technologiques et industriels
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="service-card bg-white rounded-xl shadow-lg p-8 transition duration-300 hover:border-blue-500 border border-transparent animate-fade-in relative">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-blue-500"></div>
+                    <div class="text-blue-500 mb-4">
+                        <i class="fas fa-industry text-4xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-gray-800">Maintenance Industrielle</h3>
+                    <p class="text-gray-600">
+                        Maintenance préventive, corrective et amélioration continue pour garantir la performance optimale de vos équipements industriels.
+                    </p>
+                    <ul class="mt-6 space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-blue-500 mt-1 mr-3"></i>
+                            <span>Diagnostic technique avancé</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-blue-500 mt-1 mr-3"></i>
+                            <span>Optimisation des processus</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-blue-500 mt-1 mr-3"></i>
+                            <span>Intervention rapide 24/7</span>
+                        </li>
+                    </ul>
+                    <div class="mt-6">
+                        <a href="#" class="text-blue-500 font-medium inline-flex items-center">
+                            En savoir plus <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Service 2 -->
+                <div class="service-card bg-white rounded-xl shadow-lg p-8 transition duration-300 hover:border-blue-500 border border-transparent animate-fade-in delay-100 relative">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-blue-500"></div>
+                    <div class="text-blue-500 mb-4">
+                        <i class="fas fa-code text-4xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-gray-800">Développement Web</h3>
+                    <p class="text-gray-600">
+                        Création de sites vitrines, e-commerce et applications web sur mesure pour propulser votre présence en ligne.
+                    </p>
+                    <ul class="mt-6 space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-blue-500 mt-1 mr-3"></i>
+                            <span>Design responsive et moderne</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-blue-500 mt-1 mr-3"></i>
+                            <span>Optimisation SEO avancée</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-blue-500 mt-1 mr-3"></i>
+                            <span>Sécurité renforcée</span>
+                        </li>
+                    </ul>
+                    <div class="mt-6">
+                        <a href="#" class="text-blue-500 font-medium inline-flex items-center">
+                            En savoir plus <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Service 3 -->
+                <div class="service-card bg-white rounded-xl shadow-lg p-8 transition duration-300 hover:border-blue-500 border border-transparent animate-fade-in delay-200 relative">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-blue-500"></div>
+                    <div class="text-blue-500 mb-4">
+                        <i class="fas fa-graduation-cap text-4xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-gray-800">Formations Techniques</h3>
+                    <p class="text-gray-600">
+                        Programmes de formation adaptés pour accompagner les passionnés vers les métiers d'avenir dans le domaine technologique.
+                    </p>
+                    <ul class="mt-6 space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-blue-500 mt-1 mr-3"></i>
+                            <span>Pédagogie pratique et interactive</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-blue-500 mt-1 mr-3"></i>
+                            <span>Certifications reconnues</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-blue-500 mt-1 mr-3"></i>
+                            <span>Suivi personnalisé</span>
+                        </li>
+                    </ul>
+                    <div class="mt-6">
+                        <a href="#" class="text-blue-500 font-medium inline-flex items-center">
+                            En savoir plus <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-16 animate-fade-in delay-300">
+                <a href="#" class="inline-flex items-center bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-8 rounded-full transition duration-300 transform hover:scale-105">
+                    Voir tous nos services <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="inline-block bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-sm font-medium mb-4">Témoignages</span>
+                <h2 class="text-3xl font-bold mb-4 text-gray-800">Ce que nos clients disent</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    Découvrez les retours de nos clients satisfaits
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition duration-300 animate-fade-in">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold text-xl mr-4">JD</div>
+                        <div>
+                            <h4 class="font-bold text-gray-800">Jean Dupont</h4>
+                            <p class="text-gray-600 text-sm">Directeur, Industrie ABC</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-6">
+                        "KelMultitek a révolutionné notre maintenance industrielle. Leurs interventions rapides et leur expertise technique ont réduit nos temps d'arrêt de 40%."
+                    </p>
+                    <div class="flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition duration-300 animate-fade-in delay-100">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold text-xl mr-4">SM</div>
+                        <div>
+                            <h4 class="font-bold text-gray-800">Sophie Martin</h4>
+                            <p class="text-gray-600 text-sm">CEO, E-commerce XYZ</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-6">
+                        "Notre plateforme e-commerce développée par KelMultitek a dépassé nos attentes. Leur approche client et leur expertise technique sont exceptionnelles."
+                    </p>
+                    <div class="flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition duration-300 animate-fade-in delay-200">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold text-xl mr-4">TL</div>
+                        <div>
+                            <h4 class="font-bold text-gray-800">Thomas Leroy</h4>
+                            <p class="text-gray-600 text-sm">Responsable Formation</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-6">
+                        "Les formations techniques de KelMultitek ont permis à nos équipes d'acquérir des compétences pratiques immédiatement applicables. Pédagogie excellente."
+                    </p>
+                    <div class="flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projets" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="inline-block bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-sm font-medium mb-4">Nos Réalisations</span>
+                <h2 class="text-3xl font-bold mb-4 text-gray-800">Projets récents</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    Découvrez quelques-uns de nos projets qui témoignent de notre expertise
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1 -->
+                <div class="project-card bg-white rounded-xl shadow-lg overflow-hidden animate-fade-in group">
+                    <div class="h-64 bg-cover bg-center relative" style="background-image: url('https://images.unsplash.com/photo-1481487196290-c152efe083f5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1524&q=80')">
+                        <div class="project-overlay text-white text-center p-6">
+                            <h3 class="text-xl font-bold mb-2">Optimisation d'usine</h3>
+                            <p class="mb-4">Réduction de 30% des temps d'arrêt grâce à notre programme de maintenance préventive</p>
+                            <a href="#" class="inline-flex items-center text-blue-300 hover:text-white font-medium">
+                                Voir détails <i class="fas fa-arrow-right ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <span class="inline-block bg-blue-100 text-blue-600 px-2 py-1 rounded-full text-xs font-medium mb-2">Maintenance industrielle</span>
+                        <h3 class="text-xl font-bold mb-2 text-gray-800">Optimisation d'usine</h3>
+                        <p class="text-gray-600">Programme complet de maintenance préventive pour une usine de production</p>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="project-card bg-white rounded-xl shadow-lg overflow-hidden animate-fade-in delay-100 group">
+                    <div class="h-64 bg-cover bg-center relative" style="background-image: url('https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1528&q=80')">
+                        <div class="project-overlay text-white text-center p-6">
+                            <h3 class="text-xl font-bold mb-2">Plateforme e-commerce</h3>
+                            <p class="mb-4">Solution complète avec paiement en ligne sécurisé et gestion de stocks</p>
+                            <a href="#" class="inline-flex items-center text-blue-300 hover:text-white font-medium">
+                                Voir détails <i class="fas fa-arrow-right ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <span class="inline-block bg-blue-100 text-blue-600 px-2 py-1 rounded-full text-xs font-medium mb-2">Développement web</span>
+                        <h3 class="text-xl font-bold mb-2 text-gray-800">Plateforme e-commerce</h3>
+                        <p class="text-gray-600">Site e-commerce avec système de paiement et gestion d'inventaire</p>
+                    </div>
+                </div>
+                
+                <!-- Project 3 -->
+                <div class="project-card bg-white rounded-xl shadow-lg overflow-hidden animate-fade-in delay-200 group">
+                    <div class="h-64 bg-cover bg-center relative" style="background-image: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80')">
+                        <div class="project-overlay text-white text-center p-6">
+                            <h3 class="text-xl font-bold mb-2">Formation en automatisme</h3>
+                            <p class="mb-4">Programme certifiant pour techniciens industriels</p>
+                            <a href="#" class="inline-flex items-center text-blue-300 hover:text-white font-medium">
+                                Voir détails <i class="fas fa-arrow-right ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <span class="inline-block bg-blue-100 text-blue-600 px-2 py-1 rounded-full text-xs font-medium mb-2">Formation technique</span>
+                        <h3 class="text-xl font-bold mb-2 text-gray-800">Formation en automatisme</h3>
+                        <p class="text-gray-600">Programme de formation certifiante pour techniciens industriels</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12 animate-fade-in delay-300">
+                <a href="#" class="inline-flex items-center bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-8 rounded-full transition duration-300 transform hover:scale-105">
+                    Voir tous nos projets <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 gradient-bg text-white">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6 animate-fade-in">Prêt à transformer votre entreprise ?</h2>
+            <p class="text-xl mb-8 max-w-3xl mx-auto animate-fade-in delay-100">
+                Contactez-nous dès aujourd'hui pour discuter de votre projet et découvrir comment nous pouvons vous aider.
+            </p>
+            <div class="animate-fade-in delay-200">
+                <a href="#contact" class="inline-flex items-center bg-white hover:bg-gray-100 text-blue-600 font-bold py-3 px-8 rounded-full transition duration-300 transform hover:scale-105">
+                    Demander un devis <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-16">
+                    <span class="inline-block bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-sm font-medium mb-4">Contact</span>
+                    <h2 class="text-3xl font-bold mb-4 text-gray-800">Restons en contact</h2>
+                    <p class="text-xl text-gray-600">
+                        Nous sommes à votre écoute pour répondre à toutes vos questions
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                    <div class="animate-fade-in">
+                        <h3 class="text-xl font-bold mb-6 text-gray-800">Nos coordonnées</h3>
+                        <div class="space-y-6">
+                            <div class="flex items-start p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition duration-300">
+                                <i class="fas fa-envelope text-blue-500 text-xl mt-1 mr-4"></i>
+                                <div>
+                                    <h4 class="font-bold text-gray-800">Email</h4>
+                                    <p class="text-gray-600">contact@kelmultitek.com</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition duration-300">
+                                <i class="fas fa-phone-alt text-blue-500 text-xl mt-1 mr-4"></i>
+                                <div>
+                                    <h4 class="font-bold text-gray-800">Téléphone</h4>
+                                    <p class="text-gray-600">+229 01 23 45 67 89</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition duration-300">
+                                <i class="fas fa-map-marker-alt text-blue-500 text-xl mt-1 mr-4"></i>
+                                <div>
+                                    <h4 class="font-bold text-gray-800">Adresse</h4>
+                                    <p class="text-gray-600">123 Rue de la Technologie, Cotonou, Bénin</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-10">
+                            <h3 class="text-xl font-bold mb-6 text-gray-800">Heures d'ouverture</h3>
+                            <div class="bg-white p-6 rounded-lg shadow-sm">
+                                <div class="flex justify-between py-3 border-b border-gray-100">
+                                    <span class="text-gray-600">Lundi - Vendredi</span>
+                                    <span class="font-medium text-gray-800">8h00 - 18h00</span>
+                                </div>
+                                <div class="flex justify-between py-3">
+                                    <span class="text-gray-600">Samedi</span>
+                                    <span class="font-medium text-gray-800">9h00 - 13h00</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-10">
+                            <h3 class="text-xl font-bold mb-6 text-gray-800">Suivez-nous</h3>
+                            <div class="flex space-x-4">
+                                <a href="#" class="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center hover:bg-blue-700 transition duration-300 transform hover:-translate-y-1">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                <a href="#" class="w-12 h-12 rounded-full bg-blue-400 flex items-center justify-center hover:bg-blue-500 transition duration-300 transform hover:-translate-y-1">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                                <a href="#" class="w-12 h-12 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center hover:from-purple-600 hover:to-pink-600 transition duration-300 transform hover:-translate-y-1">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                                <a href="#" class="w-12 h-12 rounded-full bg-blue-700 flex items-center justify-center hover:bg-blue-800 transition duration-300 transform hover:-translate-y-1">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="animate-fade-in delay-100">
+                        <h3 class="text-xl font-bold mb-6 text-gray-800">Envoyez-nous un message</h3>
+                        <form class="space-y-6">
+                            <div>
+                                <label for="name" class="block mb-2 font-medium text-gray-700">Nom complet *</label>
+                                <input type="text" id="name" class="w-full px-4 py-3 rounded-lg bg-white border border-gray-200 focus:border-blue-500 focus:outline-none contact-input" required>
+                            </div>
+                            <div>
+                                <label for="email" class="block mb-2 font-medium text-gray-700">Email *</label>
+                                <input type="email" id="email" class="w-full px-4 py-3 rounded-lg bg-white border border-gray-200 focus:border-blue-500 focus:outline-none contact-input" required>
+                            </div>
+                            <div>
+                                <label for="phone" class="block mb-2 font-medium text-gray-700">Téléphone</label>
+                                <input type="tel" id="phone" class="w-full px-4 py-3 rounded-lg bg-white border border-gray-200 focus:border-blue-500 focus:outline-none contact-input">
+                            </div>
+                            <div>
+                                <label for="subject" class="block mb-2 font-medium text-gray-700">Sujet *</label>
+                                <select id="subject" class="w-full px-4 py-3 rounded-lg bg-white border border-gray-200 focus:border-blue-500 focus:outline-none contact-input" required>
+                                    <option value="">Sélectionnez un sujet</option>
+                                    <option value="maintenance">Maintenance industrielle</option>
+                                    <option value="web">Développement web</option>
+                                    <option value="formation">Formation technique</option>
+                                    <option value="autre">Autre</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="message" class="block mb-2 font-medium text-gray-700">Message *</label>
+                                <textarea id="message" rows="5" class="w-full px-4 py-3 rounded-lg bg-white border border-gray-200 focus:border-blue-500 focus:outline-none contact-input" required></textarea>
+                            </div>
+                            <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300 transform hover:scale-105 flex items-center justify-center">
+                                <i class="fas fa-paper-plane mr-2"></i> Envoyer le message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-cogs text-xl text-blue-300 mr-3"></i>
+                        <span class="text-xl font-bold">KelMultitek</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">
+                        Votre partenaire technologique pour des solutions innovantes et fiables.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Services</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Maintenance industrielle</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Développement web</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Applications mobiles</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Formations techniques</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Consulting</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Liens utiles</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#accueil" class="text-gray-400 hover:text-white transition duration-300">Accueil</a></li>
+                        <li><a href="#apropos" class="text-gray-400 hover:text-white transition duration-300">À propos</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-white transition duration-300">Services</a></li>
+                        <li><a href="#projets" class="text-gray-400 hover:text-white transition duration-300">Projets</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-white transition duration-300">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Newsletter</h3>
+                    <p class="text-gray-400 mb-4">
+                        Abonnez-vous à notre newsletter pour recevoir nos dernières actualités.
+                    </p>
+                    <form class="flex">
+                        <input type="email" placeholder="Votre email" class="px-4 py-2 rounded-l-lg focus:outline-none text-gray-900 w-full">
+                        <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-r-lg transition duration-300">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 mb-4 md:mb-0">
+                    © 2025 KelMultitek. Tous droits réservés.
+                </p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-white transition duration-300">Mentions légales</a>
+                    <a href="#" class="text-gray-400 hover:text-white transition duration-300">Politique de confidentialité</a>
+                    <a href="#" class="text-gray-400 hover:text-white transition duration-300">Conditions générales</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to top button -->
+    <button id="backToTop" class="fixed bottom-6 right-6 bg-blue-500 hover:bg-blue-600 text-white w-12 h-12 rounded-full shadow-lg flex items-center justify-center opacity-0 invisible transition-all duration-300 transform hover:scale-110">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // Back to top button
+        const backToTopButton = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.remove('opacity-0', 'invisible');
+                backToTopButton.classList.add('opacity-100', 'visible');
+            } else {
+                backToTopButton.classList.remove('opacity-100', 'visible');
+                backToTopButton.classList.add('opacity-0', 'invisible');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Animate elements when they come into view
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.animate-fade-in');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.3;
+                
+                if (elementPosition < screenPosition) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        };
+        
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
+    </script>
+</body>
+</html>
